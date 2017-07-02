@@ -1,0 +1,17 @@
+in views.py, pass form data to database like follows
+
+from models import User
+...
+...
+if form.validate_on_submit()
+    new_user = User(username=form.username.data, password=form.password.data, email=form.email.data)
+    db.session.add(new_user)
+    db.session.commit()
+
+
+### Useful way to iterate over form fields (sometimes. It can be a pain).
+{% for field in form %}
+    {{ field }}
+    {% if field.flags.required %}*{% endif %}{{ field.label }}
+    <br/>
+{% endfor %}

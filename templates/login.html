@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 align='center'>Log In</h1>
+
+<!-- Flash Message if username or password are incorrect -->
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         <h2 align='center'>{{ message }}</h2>
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+
+<div align='center'>
+<form method="POST" action="/login">
+    
+    {{ form.hidden_tag() }}
+    
+    <p>Username</p>
+    {{ form.username() }}
+    {% for error in form.username.errors %} {{ error }} {% endfor %}
+    
+    <p>Password</p>
+    {{ form.password() }}
+    {% for error in form.password.errors %} {{ error }} {% endfor %}
+    <div>
+      <p>Remember Me: {{ form.remember() }}</p>
+    </div>
+    <button type="submit" value="submit" name="submit">Submit</button>
+</form>
+</div>
+{% endblock %}
