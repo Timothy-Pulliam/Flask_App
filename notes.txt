@@ -15,3 +15,6 @@ if form.validate_on_submit()
     {% if field.flags.required %}*{% endif %}{{ field.label }}
     <br/>
 {% endfor %}
+
+### Cannot add a NOT NULL column with default value NULL
+https://stackoverflow.com/questions/3170634/how-to-solve-cannot-add-a-not-null-column-with-default-value-null-in-sqlite3

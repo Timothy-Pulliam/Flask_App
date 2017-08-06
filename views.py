@@ -25,11 +25,15 @@ def signup():
                                    )
             myapp.db.session.add(new_user)
             myapp.db.session.commit()
+            #msg = myapp.mail.Message("Thank you for signing up!",
+            #                 recipients=[new_user.email])
+            #myapp.mail.send(msg)
             return flask.redirect('/login')
 
     except exc.IntegrityError as e:
         flask.flash("Username or Email already taken. Try another one.", 'error')
     return flask.render_template("signup.html", form=form)
+
 
 
 @myapp.app.route('/login', methods=['POST', 'GET'])
@@ -70,6 +74,10 @@ def logout():
 def dashboard():
     return flask.render_template('dashboard.html')
 
+@myapp.app.route('/me', methods=['GET'])
+@flask_login.login_required
+def userInfo():
+    return flask.jsonify(flask_login.current_user.as_dict())
 
 @myapp.app.errorhandler(404)
 def page_not_found(error):
